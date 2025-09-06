@@ -1,0 +1,1185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nirmaan Agency | Premium Digital Solutions</title>
+    <link rel="icon" type="image/png" href="Screenshot_2025-09-06_205354-removebg-preview.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+   <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loader" id="loader">
+        <div class="loader-content">
+            <img src="ChatGPT_Image_Sep_6__2025__09_37_43_AM-removebg-preview.png" alt="Nirmexa Logo" class="loader-logo">
+            <div class="loader-dots">
+                <div class="loader-dot"></div>
+                <div class="loader-dot"></div>
+                <div class="loader-dot"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header id="header">
+        <nav class="nav-container">
+            <a href="#home" class="logo">
+                <img src="Screenshot_2025-09-06_205354-removebg-preview.png" alt="Nirmexa Logo" class="logo-img">
+                <span class="logo-text">NIRMEXA</span>
+            </a>
+
+           <ul class="nav-menu" id="navMenu">
+                <li><a href="#home" class="nav-link active">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#services" class="nav-link">Services</a></li>
+                <li><a href="#portfolio" class="nav-link">Portfolio</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+                
+                <!-- Admin link - subtly hidden -->
+                <li>
+                    <a href="admin.html" class="nav-link admin-link">
+                        <i class="fas fa-lock"></i>
+                        <span>Admin</span>
+                    </a>
+                </li>
+            </ul>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-bg">
+            <div class="hero-shape-1"></div>
+            <div class="hero-shape-2"></div>
+        </div>
+        
+        <div class="hero-content">
+            <div class="hero-text">
+                <div class="hero-badge">
+                     <span>Crafting Digital Excellence Since 2023</span>
+                </div>
+                
+                <h1>
+                    Transform Your Business with 
+                    <span class="gradient-text">Digital Excellence</span>
+                </h1>
+                
+                <p class="hero-description">
+                    We craft stunning websites, powerful mobile apps, and compelling designs that elevate your brand and drive real business growth. Your digital transformation starts here.
+                </p>
+                
+                <div class="hero-buttons">
+                    <a href="#contact" class="btn-primary">
+                        <i class="fas fa-arrow-right"></i>
+                        Start Your Project
+                    </a>
+                    <a href="#portfolio" class="btn-secondary">
+                        <i class="fas fa-play"></i>
+                        View Our Work
+                    </a>
+                </div>
+            </div>
+            
+            <div class="hero-image">
+                <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="Digital Solutions" class="hero-mockup">
+                
+                <div class="floating-card floating-card-1">
+                    <div class="card-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h4>Web Development</h4>
+                    <p>Custom Solutions</p>
+                </div>
+                
+                <div class="floating-card floating-card-2">
+                    <div class="card-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h4>Mobile Apps</h4>
+                    <p>iOS & Android</p>
+                </div>
+                
+                <div class="floating-card floating-card-3">
+                    <div class="card-icon">
+                        <i class="fas fa-paint-brush"></i>
+                    </div>
+                    <h4>UI/UX Design</h4>
+                    <p>Creative Excellence</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="stats-bg"></div>
+        <div class="stats-container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <span class="stat-number" data-count="150">0</span>
+                    <span class="stat-label">Projects Completed</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" data-count="98">0</span>
+                    <span class="stat-label">Client Satisfaction</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" data-count="50">0</span>
+                    <span class="stat-label">Happy Clients</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" data-count="24">0</span>
+                    <span class="stat-label">Support Hours</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services-section" id="services">
+        <div class="section-container">
+            <div class="section-header animate-on-scroll">
+                <div class="section-badge">Our Services</div>
+                <h2 class="section-title">Comprehensive Digital Solutions</h2>
+                <p class="section-description">
+                    From concept to deployment, we offer end-to-end digital services designed to elevate your business and create lasting impact in the digital landscape.
+                </p>
+            </div>
+
+            <div class="services-grid">
+                <div class="service-card animate-on-scroll">
+                    <div class="service-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3 class="service-title">Web Development</h3>
+                    <p class="service-description">
+                        Custom websites and web applications built with cutting-edge technologies for optimal performance and user experience.
+                    </p>
+                    <ul class="service-features">
+                        <li>Responsive Design</li>
+                        <li>Fast Loading Speed</li>
+                        <li>SEO Optimized</li>
+                        <li>Secure & Scalable</li>
+                    </ul>
+                    <a href="#contact" class="service-link">
+                        Learn More <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <div class="service-card animate-on-scroll">
+                    <div class="service-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3 class="service-title">Mobile App Development</h3>
+                    <p class="service-description">
+                        Native and cross-platform mobile applications that engage users and streamline business operations.
+                    </p>
+                    <ul class="service-features">
+                        <li>iOS & Android</li>
+                        <li>Cross-platform Solutions</li>
+                        <li>App Store Optimization</li>
+                        <li>Maintenance & Support</li>
+                    </ul>
+                    <a href="#contact" class="service-link">
+                        Learn More <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <div class="service-card animate-on-scroll">
+                    <div class="service-icon">
+                        <i class="fas fa-paint-brush"></i>
+                    </div>
+                    <h3 class="service-title">UI/UX Design</h3>
+                    <p class="service-description">
+                        Beautiful, intuitive designs that enhance user experience and reflect your brand's unique identity.
+                    </p>
+                    <ul class="service-features">
+                        <li>User Research</li>
+                        <li>Wireframing & Prototyping</li>
+                        <li>Visual Design</li>
+                        <li>Usability Testing</li>
+                    </ul>
+                    <a href="#contact" class="service-link">
+                        Learn More <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <div class="service-card animate-on-scroll">
+                    <div class="service-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3 class="service-title">SEO & Digital Marketing</h3>
+                    <p class="service-description">
+                        Comprehensive digital marketing strategies to increase your online visibility and drive qualified traffic.
+                    </p>
+                    <ul class="service-features">
+                        <li>Search Engine Optimization</li>
+                        <li>Social Media Marketing</li>
+                        <li>Content Marketing</li>
+                        <li>Analytics & Reporting</li>
+                    </ul>
+                    <a href="#contact" class="service-link">
+                        Learn More <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <div class="service-card animate-on-scroll">
+                    <div class="service-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                    <h3 class="service-title">E-Commerce Solutions</h3>
+                    <p class="service-description">
+                        Complete online store development with secure payment gateways and inventory management systems.
+                    </p>
+                    <ul class="service-features">
+                        <li>Custom E-commerce</li>
+                        <li>Payment Integration</li>
+                        <li>Inventory Management</li>
+                        <li>Multi-vendor Support</li>
+                    </ul>
+                    <a href="#contact" class="service-link">
+                        Learn More <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <div class="service-card animate-on-scroll">
+                    <div class="service-icon">
+                        <i class="fas fa-cloud"></i>
+                    </div>
+                    <h3 class="service-title">Cloud Solutions</h3>
+                    <p class="service-description">
+                        Scalable cloud infrastructure and migration services to ensure your applications run smoothly and securely.
+                    </p>
+                    <ul class="service-features">
+                        <li>Cloud Migration</li>
+                        <li>DevOps Services</li>
+                        <li>Server Management</li>
+                        <li>Security & Backups</li>
+                    </ul>
+                    <a href="#contact" class="service-link">
+                        Learn More <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section class="portfolio-section" id="portfolio">
+        <div class="section-container">
+            <div class="section-header animate-on-scroll">
+                <div class="section-badge">Our Portfolio</div>
+                <h2 class="section-title">Recent Projects</h2>
+                <p class="section-description">
+                    Discover how we've helped businesses transform their digital presence with innovative solutions and creative excellence.
+                </p>
+            </div>
+
+            <div class="portfolio-filters">
+                <button class="filter-btn active" data-filter="all">All Projects</button>
+                <button class="filter-btn" data-filter="web">Web Development</button>
+                <button class="filter-btn" data-filter="mobile">Mobile Apps</button>
+                <button class="filter-btn" data-filter="design">UI/UX Design</button>
+            </div>
+
+            <div class="portfolio-grid">
+                <div class="portfolio-item animate-on-scroll" data-category="web">
+                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=2015&q=80" alt="E-commerce Platform" class="portfolio-image">
+                    <div class="portfolio-content">
+                        <div class="portfolio-category">E-Commerce</div>
+                        <h3 class="portfolio-title">Fashion Store Platform</h3>
+                        <p class="portfolio-description">
+                            A complete e-commerce solution with advanced filtering, payment integration, and inventory management.
+                        </p>
+                        <div class="portfolio-tech">
+                            <span class="tech-tag">React</span>
+                            <span class="tech-tag">Node.js</span>
+                            <span class="tech-tag">MongoDB</span>
+                            <span class="tech-tag">Stripe</span>
+                        </div>
+                        <div class="portfolio-links">
+                            <a href="#" class="portfolio-link">
+                                <i class="fas fa-external-link-alt"></i> Live Demo
+                            </a>
+                            <a href="#" class="portfolio-link">
+                                <i class="fas fa-code"></i> View Code
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="portfolio-item animate-on-scroll" data-category="mobile">
+                    <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="Fitness App" class="portfolio-image">
+                    <div class="portfolio-content">
+                        <div class="portfolio-category">Mobile App</div>
+                        <h3 class="portfolio-title">FitTracker Mobile App</h3>
+                        <p class="portfolio-description">
+                            A comprehensive fitness tracking application with workout plans, progress tracking, and social features.
+                        </p>
+                        <div class="portfolio-tech">
+                            <span class="tech-tag">React Native</span>
+                            <span class="tech-tag">Firebase</span>
+                            <span class="tech-tag">Redux</span>
+                            <span class="tech-tag">Chart.js</span>
+                        </div>
+                        <div class="portfolio-links">
+                            <a href="#" class="portfolio-link">
+                                <i class="fab fa-app-store"></i> App Store
+                            </a>
+                            <a href="#" class="portfolio-link">
+                                <i class="fab fa-google-play"></i> Play Store
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="portfolio-item animate-on-scroll" data-category="web">
+                    <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="Business Website" class="portfolio-image">
+                    <div class="portfolio-content">
+                        <div class="portfolio-category">Corporate</div>
+                        <h3 class="portfolio-title">Corporate Website Redesign</h3>
+                        <p class="portfolio-description">
+                            Modern, professional website redesign for a financial consulting firm with client portal integration.
+                        </p>
+                        <div class="portfolio-tech">
+                            <span class="tech-tag">WordPress</span>
+                            <span class="tech-tag">PHP</span>
+                            <span class="tech-tag">MySQL</span>
+                            <span class="tech-tag">GSAP</span>
+                        </div>
+                        <div class="portfolio-links">
+                            <a href="#" class="portfolio-link">
+                                <i class="fas fa-external-link-alt"></i> Live Site
+                            </a>
+                            <a href="#" class="portfolio-link">
+                                <i class="fas fa-images"></i> Gallery
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="portfolio-item animate-on-scroll" data-category="design">
+                    <img src="https://images.unsplash.com/photo-1586717791821-3f44a563fa4c?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="Brand Identity" class="portfolio-image">
+                    <div class="portfolio-content">
+                        <div class="portfolio-category">Branding</div>
+                        <h3 class="portfolio-title">Complete Brand Identity</h3>
+                        <p class="portfolio-description">
+                            Full brand identity design including logo, color palette, typography, and marketing materials.
+                        </p>
+                        <div class="portfolio-tech">
+                            <span class="tech-tag">Adobe CC</span>
+                            <span class="tech-tag">Figma</span>
+                            <span class="tech-tag">Sketch</span>
+                            <span class="tech-tag">Principle</span>
+                        </div>
+                        <div class="portfolio-links">
+                            <a href="#" class="portfolio-link">
+                                <i class="fas fa-eye"></i> View Project
+                            </a>
+                            <a href="#" class="portfolio-link">
+                                <i class="fas fa-download"></i> Brand Guide
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="portfolio-item animate-on-scroll" data-category="mobile">
+                    <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="Restaurant App" class="portfolio-image">
+                    <div class="portfolio-content">
+                        <div class="portfolio-category">Food & Dining</div>
+                        <h3 class="portfolio-title">Restaurant Management App</h3>
+                        <p class="portfolio-description">
+                            Complete restaurant management system with online ordering, table reservations, and staff management.
+                        </p>
+                        <div class="portfolio-tech">
+                            <span class="tech-tag">Flutter</span>
+                            <span class="tech-tag">Dart</span>
+                            <span class="tech-tag">Firebase</span>
+                            <span class="tech-tag">Stripe</span>
+                        </div>
+                        <div class="portfolio-links">
+                            <a href="#" class="portfolio-link">
+                                <i class="fas fa-mobile-alt"></i> Live Demo
+                            </a>
+                            <a href="#" class="portfolio-link">
+                                <i class="fas fa-code"></i> Case Study
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="portfolio-item animate-on-scroll" data-category="web">
+                    <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-4.0.3&auto=format&fit=crop&w=2072&q=80" alt="SaaS Platform" class="portfolio-image">
+                    <div class="portfolio-content">
+                        <div class="portfolio-category">SaaS</div>
+                        <h3 class="portfolio-title">Project Management Platform</h3>
+                        <p class="portfolio-description">
+                            Advanced project management SaaS platform with team collaboration, time tracking, and reporting features.
+                        </p>
+                        <div class="portfolio-tech">
+                            <span class="tech-tag">Vue.js</span>
+                            <span class="tech-tag">Laravel</span>
+                            <span class="tech-tag">PostgreSQL</span>
+                            <span class="tech-tag">Docker</span>
+                        </div>
+                        <div class="portfolio-links">
+                            <a href="#" class="portfolio-link">
+                                <i class="fas fa-external-link-alt"></i> Live Platform
+                            </a>
+                            <a href="#" class="portfolio-link">
+                                <i class="fas fa-play"></i> Demo Video
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+   <!-- About Section -->
+<section class="services-section" id="about" style="background: #fff; padding: 5rem 2rem;">
+    <div class="section-container" style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+        <!-- Header -->
+        <div class="section-header animate-on-scroll" style="text-align: center; max-width: 800px; margin: 0 auto;">
+            <div class="section-badge" style="background: var(--gradient-1); color: #fff; display: inline-block; padding: 0.4rem 1rem; border-radius: 20px; font-size: 0.85rem; font-weight: 600; margin-bottom: 1rem;">
+                About Nirmexa
+            </div>
+            <h2 class="section-title" style="font-size: 2.5rem; font-weight: 700; color: var(--primary); margin-bottom: 1rem;">
+                Building Digital Foundations
+            </h2>
+            <p class="section-description" style="color: var(--gray-600); line-height: 1.8; font-size: 1.05rem;">
+                Founded with a vision to transform businesses through innovative digital solutions, Nirmexa Solutions has been at the forefront of web development, mobile app creation, and digital design since 2023.
+            </p>
+        </div>
+
+        <!-- Content Grid -->
+        <div style="width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; margin-top: 4rem;">
+            <!-- Mission & Values -->
+            <div class="animate-on-scroll" style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; width: 100%;">
+                <h3 style="font-size: 2rem; font-weight: 600; color: var(--primary); margin-bottom: 1.5rem;">
+                    Our Mission
+                </h3>
+                <p style="color: var(--gray-700); line-height: 1.8; margin-bottom: 2.5rem; font-size: 1.05rem; max-width: 600px; margin: 0 auto;">
+                    At <strong>Nirmexa</strong>, we empower businesses with futuristic and innovative digital solutions. 
+                    Our name “Nirmexa” symbolizes a blend of creativity and technology, reflecting our vision to craft 
+                    modern, scalable, and meaningful digital experiences that inspire growth and success.
+                </p>
+
+                <!-- Core Values -->
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; max-width: 600px; margin: 0 auto;">
+                    <!-- Innovation -->
+                    <div style="display: flex; align-items: flex-start; gap: 0.75rem;">
+                        <div style="width: 44px; height: 44px; background: var(--gradient-4); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 1.1rem; transition: transform 0.3s;">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                        <div>
+                            <h4 style="color: var(--primary); font-weight: 600;">Innovation</h4>
+                            <p style="color: var(--gray-600); font-size: 0.9rem;">Cutting-edge solutions</p>
+                        </div>
+                    </div>
+
+                    <!-- Collaboration -->
+                    <div style="display: flex; align-items: flex-start; gap: 0.75rem;">
+                        <div style="width: 44px; height: 44px; background: var(--gradient-1); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 1.1rem; transition: transform 0.3s;">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div>
+                            <h4 style="color: var(--primary); font-weight: 600;">Collaboration</h4>
+                            <p style="color: var(--gray-600); font-size: 0.9rem;">Team-focused approach</p>
+                        </div>
+                    </div>
+
+                    <!-- Quality -->
+                    <div style="display: flex; align-items: flex-start; gap: 0.75rem;">
+                        <div style="width: 44px; height: 44px; background: var(--gradient-2); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 1.1rem; transition: transform 0.3s;">
+                            <i class="fas fa-award"></i>
+                        </div>
+                        <div>
+                            <h4 style="color: var(--primary); font-weight: 600;">Quality</h4>
+                            <p style="color: var(--gray-600); font-size: 0.9rem;">Excellence in delivery</p>
+                        </div>
+                    </div>
+
+                    <!-- Passion -->
+                    <div style="display: flex; align-items: flex-start; gap: 0.75rem;">
+                        <div style="width: 44px; height: 44px; background: var(--gradient-3); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 1.1rem; transition: transform 0.3s;">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <div>
+                            <h4 style="color: var(--primary); font-weight: 600;">Passion</h4>
+                            <p style="color: var(--gray-600); font-size: 0.9rem;">Love for what we do</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+          
+
+        </div>
+    </div>
+</section>
+
+
+    <!-- Testimonials Section -->
+    <section class="testimonials-section">
+        <div class="testimonials-bg"></div>
+        <div class="section-container testimonials-container">
+            <div class="section-header animate-on-scroll">
+                <div class="section-badge">Testimonials</div>
+                <h2 class="section-title">What Our Clients Say</h2>
+                <p class="section-description">
+                    Hear from businesses that have transformed their digital presence with our innovative solutions and dedicated support.
+                </p>
+            </div>
+
+            <div class="testimonials-slider">
+                <div class="testimonial-card active">
+                    <div class="testimonial-quote">
+                        <i class="fas fa-quote-left"></i>
+                    </div>
+                    <div class="testimonial-content">
+                        "Working with Nirmexa Solutions was a game-changer for our business. Their team delivered a stunning website that perfectly captures our brand essence and has significantly improved our online presence. The attention to detail and professional approach exceeded all our expectations."
+                    </div>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/women/45.jpg" alt="Client" class="author-avatar">
+                        <div class="author-info">
+                            <h4>Dr. Priya Sharma</h4>
+                            <p>CEO, TechVision Solutions</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-quote">
+                        <i class="fas fa-quote-left"></i>
+                    </div>
+                    <div class="testimonial-content">
+                        "The mobile app developed by Nirmexa Solutions transformed how we engage with our customers. The intuitive design and powerful features helped us increase user engagement by 300%. Their post-launch support has been exceptional throughout our journey."
+                    </div>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Client" class="author-avatar">
+                        <div class="author-info">
+                            <h4>Rahul Kapoor</h4>
+                            <p>Founder, FoodieHub</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-quote">
+                        <i class="fas fa-quote-left"></i>
+                    </div>
+                    <div class="testimonial-content">
+                        "From concept to launch, Nirmexa Solutions provided outstanding service. Their expertise in e-commerce development helped us create a platform that not only looks amazing but also drives sales. We've seen a 250% increase in online revenue since the launch."
+                    </div>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Client" class="author-avatar">
+                        <div class="author-info">
+                            <h4>Neha Patel</h4>
+                            <p>Director, StyleCraft Boutique</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-nav">
+                    <div class="nav-dot active" data-slide="0"></div>
+                    <div class="nav-dot" data-slide="1"></div>
+                    <div class="nav-dot" data-slide="2"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section" id="contact">
+        <div class="section-container">
+            <div class="section-header animate-on-scroll">
+                <div class="section-badge">Get In Touch</div>
+                <h2 class="section-title">Let's Build Something Amazing</h2>
+                <p class="section-description">
+                    Ready to transform your digital presence? Contact us today to discuss your project and discover how we can help your business grow.
+                </p>
+            </div>
+
+            <div class="contact-grid">
+                <div class="contact-info animate-on-scroll">
+                    <h3>Let's Start a Conversation</h3>
+                    <p>
+                        We're here to help you bring your digital vision to life. Whether you need a new website, mobile app, or complete digital transformation, our team is ready to deliver exceptional results.
+                    </p>
+
+                    <div class="contact-methods">
+                        <div class="contact-method">
+                            <div class="method-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="method-details">
+                                <h4>Email Us</h4>
+                                <a href="mailto:nirmexa@gmail.com">nirmexa@gmail.com</a>
+                            </div>
+                        </div>
+
+                        <div class="contact-method">
+                            <div class="method-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div class="method-details">
+                                <h4>Call / WhatsApp</h4>
+                                <a href="tel:+917079248804">+91 7079248804</a>
+                            </div>
+                        </div>
+
+                        <div class="contact-method">
+                            <div class="method-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="method-details">
+                                <h4>Visit Our Office</h4>
+                                <p>Delhi, India</p>
+                            </div>
+                        </div>
+
+                        <div class="contact-method">
+                            <div class="method-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="method-details">
+                                <h4>Working Hours</h4>
+                                <p>Mon - Fri: 9:00 AM - 6:00 PM<br>Sat: 10:00 AM - 3:00 PM</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+
+              <form class="contact-form animate-on-scroll" id="contactForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstName" class="form-label">First Name</label>
+                            <input type="text" id="firstName" name="firstName" class="form-control" placeholder="John" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName" class="form-label">Last Name</label>
+                            <input type="text" id="lastName" name="lastName" class="form-control" placeholder="Doe" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email" class="form-label">Email Address</label>
+                        <input type="email" id="email" name="email" class="form-control" placeholder="john@example.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone" class="form-label">Phone Number</label>
+                        <input type="tel" id="phone" name="phone" class="form-control" placeholder="+91 9876543210">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="service" class="form-label">Service Interested In</label>
+                        <select id="service" name="service" class="form-control" required>
+                            <option value="">Select a service</option>
+                            <option value="web">Web Development</option>
+                            <option value="mobile">Mobile App Development</option>
+                            <option value="design">UI/UX Design</option>
+                            <option value="ecommerce">E-Commerce Solutions</option>
+                            <option value="seo">SEO & Digital Marketing</option>
+                            <option value="cloud">Cloud Solutions</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="budget" class="form-label">Project Budget</label>
+                        <select id="budget" name="budget" class="form-control">
+                            <option value="">Select budget range</option>
+                            <option value="5k-15k">₹5,000 - ₹15,000</option>
+                            <option value="15k-50k">₹15,000 - ₹50,000</option>
+                            <option value="50k-1l">₹50,000 - ₹1,00,000</option>
+                            <option value="1l+">₹1,00,000+</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message" class="form-label">Project Details</label>
+                        <textarea id="message" name="message" class="form-control" placeholder="Tell us about your project requirements, goals, and any specific features you have in mind..." required></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-button">
+                        <i class="fas fa-paper-plane"></i>
+                        Send Message
+                    </button>
+                </form>
+                   <div id="formStatus" class="status-message hidden"></div>
+            </div>
+        </div>
+    </section>
+    <script>
+         // Configuration - Replace with your Google Apps Script URL
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbxCK_XpQGosSzXl_W4LjJglxu4S_xEJH264mFY4KAoqXeHElHb52RKvLwbFwrGiVGtL/exec';
+        
+        // DOM Elements
+        const contactForm = document.getElementById('contactForm');
+        const formStatus = document.getElementById('formStatus');
+        const fetchButton = document.getElementById('fetchData');
+        const clearButton = document.getElementById('clearData');
+        const adminStatus = document.getElementById('adminStatus');
+        const submissionsBody = document.getElementById('submissionsBody');
+
+        // Animation on scroll
+        function checkScroll() {
+            const elements = document.querySelectorAll('.animate-on-scroll');
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.3;
+                if (elementPosition < screenPosition) {
+                    element.classList.add('visible');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', checkScroll);
+        window.addEventListener('load', checkScroll);
+
+        // Form submission handler
+        contactForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const submitButton = contactForm.querySelector('button[type="submit"]');
+            const originalText = submitButton.innerHTML;
+            
+            // Update button to show loading state
+            submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+            submitButton.disabled = true;
+            
+            try {
+                const formData = new FormData(contactForm);
+                const response = await fetch(scriptURL, {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const result = await response.json();
+                
+                if (result.result === 'success') {
+                    showStatus(formStatus, 'Form submitted successfully!', 'success');
+                    contactForm.reset();
+                } else {
+                    throw new Error(result.error || 'Unknown error occurred');
+                }
+            } catch (error) {
+                console.error('Error!', error.message);
+                showStatus(formStatus, `Error: ${error.message}`, 'error');
+            } finally {
+                submitButton.innerHTML = originalText;
+                submitButton.disabled = false;
+            }
+        });
+
+        // Fetch data handler
+        fetchButton.addEventListener('click', async () => {
+            fetchButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Fetching...';
+            fetchButton.disabled = true;
+            adminStatus.classList.add('hidden');
+            
+            try {
+                // In a real implementation, you would fetch from your Google Sheets
+                // For this example, we'll use mock data
+                const mockData = [
+                    ['John Doe', 'john@example.com', 'Web Development', '₹50,000 - ₹1,00,000', '2023-05-15'],
+                    ['Jane Smith', 'jane@example.com', 'SEO & Digital Marketing', '₹15,000 - ₹50,000', '2023-05-16'],
+                    ['Robert Johnson', 'robert@example.com', 'E-Commerce Solutions', '₹1,00,000+', '2023-05-17'],
+                    ['Sarah Williams', 'sarah@example.com', 'UI/UX Design', '₹5,000 - ₹15,000', '2023-05-18'],
+                    ['Michael Brown', 'michael@example.com', 'Mobile App Development', '₹50,000 - ₹1,00,000', '2023-05-19']
+                ];
+                
+                displaySubmissions(mockData);
+                showStatus(adminStatus, 'Submissions loaded successfully', 'success');
+            } catch (error) {
+                console.error('Error fetching data:', error);
+                showStatus(adminStatus, `Error fetching data: ${error.message}`, 'error');
+            } finally {
+                fetchButton.innerHTML = '<i class="fas fa-sync-alt"></i> Fetch Submissions';
+                fetchButton.disabled = false;
+            }
+        });
+
+        // Clear data handler
+        clearButton.addEventListener('click', () => {
+            submissionsBody.innerHTML = '<tr><td colspan="5" style="text-align: center;">No submissions to display</td></tr>';
+            adminStatus.classList.add('hidden');
+        });
+
+        // Display submissions in table
+        function displaySubmissions(data) {
+            if (data.length === 0) {
+                submissionsBody.innerHTML = '<tr><td colspan="5" style="text-align: center;">No submissions found</td></tr>';
+                return;
+            }
+            
+            let tableContent = '';
+            data.forEach(row => {
+                tableContent += `
+                    <tr>
+                        <td>${row[0]}</td>
+                        <td>${row[1]}</td>
+                        <td>${row[2]}</td>
+                        <td>${row[3]}</td>
+                        <td>${row[4]}</td>
+                    </tr>
+                `;
+            });
+            
+            submissionsBody.innerHTML = tableContent;
+        }
+
+        // Show status message
+        function showStatus(element, message, type) {
+            element.textContent = message;
+            element.classList.remove('hidden', 'success', 'error');
+            element.classList.add(type);
+            
+            // Auto hide after 5 seconds
+            setTimeout(() => {
+                element.classList.add('hidden');
+            }, 5000);
+        }
+
+        // Initial check for scroll animation
+        checkScroll();
+    </script>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-bg"></div>
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div>
+                    <div class="footer-brand">
+                        <img src="Screenshot_2025-09-06_205354-removebg-preview.png" alt="Nirmexa Logo" class="logo-img">
+                        <span class="logo-text">NIRMEXA</span>
+                    </div>
+                    <p class="footer-description">
+                        Building digital foundations for modern businesses. We create innovative solutions that drive growth and transform how you connect with your customers.
+                    </p>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4>Services</h4>
+                    <ul class="footer-links">
+                        <li><a href="#services"><i class="fas fa-code"></i> Web Development</a></li>
+                        <li><a href="#services"><i class="fas fa-mobile-alt"></i> Mobile Apps</a></li>
+                        <li><a href="#services"><i class="fas fa-paint-brush"></i> UI/UX Design</a></li>
+                        <li><a href="#services"><i class="fas fa-search"></i> SEO Services</a></li>
+                        <li><a href="#services"><i class="fas fa-shopping-cart"></i> E-Commerce</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4>Company</h4>
+                    <ul class="footer-links">
+                        <li><a href="#about"><i class="fas fa-info-circle"></i> About Us</a></li>
+                        <li><a href="#portfolio"><i class="fas fa-briefcase"></i> Portfolio</a></li>
+                        <li><a href="#contact"><i class="fas fa-envelope"></i> Contact</a></li>
+                        <li><a href="#"><i class="fas fa-blog"></i> Blog</a></li>
+                        <li><a href="#"><i class="fas fa-handshake"></i> Careers</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4>Newsletter</h4>
+                    <p style="color: rgba(255, 255, 255, 0.8); margin-bottom: 1.5rem;">
+                        Subscribe to get updates on our latest projects and digital trends.
+                    </p>
+                    <form class="newsletter-form" style="display: flex; flex-direction: column; gap: 1rem;">
+                        <input type="email" placeholder="Enter your email" style="padding: 0.75rem; border: none; border-radius: 8px; background: rgba(255, 255, 255, 0.1); color: white; backdrop-filter: blur(10px);" required>
+                        <button type="submit" style="background: var(--gradient-1); color: white; padding: 0.75rem; border: none; border-radius: 8px; font-weight: 600; cursor: pointer;">
+                            Subscribe
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    <p>&copy; 2024 Nirmexa Solutions. All rights reserved. Made with <i class="fas fa-heart" style="color: #ef4444;"></i> in India</p>
+                </div>
+                <div class="footer-social">
+                    <a href="#"><i class="fas fa-shield-alt"></i> Privacy</a>
+                    <a href="#"><i class="fas fa-file-contract"></i> Terms</a>
+                    <a href="#"><i class="fas fa-cookie-bite"></i> Cookies</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <div class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <script>
+        // Loading Screen
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loader').classList.add('hidden');
+            }, 2000);
+        });
+
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navMenu = document.getElementById('navMenu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            const icon = mobileMenuBtn.querySelector('i');
+            icon.className = navMenu.classList.contains('active') ? 'fas fa-times' : 'fas fa-bars';
+        });
+
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                mobileMenuBtn.querySelector('i').className = 'fas fa-bars';
+            });
+        });
+
+        // Header scroll effect
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('header-scrolled');
+            } else {
+                header.classList.remove('header-scrolled');
+            }
+        });
+
+        // Active navigation link
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').includes(current)) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Animate stats counter
+        function animateCounter(element, start, end, duration) {
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                const value = Math.floor(progress * (end - start) + start);
+                element.textContent = value + (element.textContent.includes('%') ? '%' : '');
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            window.requestAnimationFrame(step);
+        }
+
+        // Stats animation on scroll
+        const statsSection = document.querySelector('.stats-section');
+        let statsAnimated = false;
+
+        const observerStats = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !statsAnimated) {
+                    const statNumbers = entry.target.querySelectorAll('.stat-number');
+                    statNumbers.forEach(stat => {
+                        const target = parseInt(stat.getAttribute('data-count'));
+                        animateCounter(stat, 0, target, 2000);
+                    });
+                    statsAnimated = true;
+                }
+            });
+        }, { threshold: 0.5 });
+
+        if (statsSection) {
+            observerStats.observe(statsSection);
+        }
+
+        // Testimonial slider
+        const testimonials = document.querySelectorAll('.testimonial-card');
+        const dots = document.querySelectorAll('.nav-dot');
+        let currentTestimonial = 0;
+
+        function showTestimonial(index) {
+            testimonials.forEach(testimonial => testimonial.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+            
+            testimonials[index].classList.add('active');
+            dots[index].classList.add('active');
+            currentTestimonial = index;
+        }
+
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => showTestimonial(index));
+        });
+
+        // Auto-rotate testimonials
+        setInterval(() => {
+            currentTestimonial = (currentTestimonial + 1) % testimonials.length;
+            showTestimonial(currentTestimonial);
+        }, 5000);
+
+        // Portfolio filters
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const portfolioItems = document.querySelectorAll('.portfolio-item');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Update active filter button
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                const filterValue = btn.getAttribute('data-filter');
+
+                // Filter portfolio items
+                portfolioItems.forEach(item => {
+                    if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
+                        item.style.display = 'block';
+                        setTimeout(() => {
+                            item.style.opacity = '1';
+                            item.style.transform = 'translateY(0)';
+                        }, 100);
+                    } else {
+                        item.style.opacity = '0';
+                        item.style.transform = 'translateY(20px)';
+                        setTimeout(() => {
+                            item.style.display = 'none';
+                        }, 300);
+                    }
+                });
+            });
+        });
+
+        // Scroll animations
+        const animateElements = document.querySelectorAll('.animate-on-scroll');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        animateElements.forEach(el => {
+            observer.observe(el);
+        });
+
+        // Back to top button
+        const backToTop = document.getElementById('backToTop');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Parallax effect for hero shapes
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const shapes = document.querySelectorAll('.hero-shape-1, .hero-shape-2');
+            shapes.forEach((shape, index) => {
+                const speed = 0.5 + (index * 0.2);
+                shape.style.transform = `translateY(${scrolled * speed}px)`;
+            });
+        });
+
+        // Newsletter form
+        document.querySelector('.newsletter-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = e.target.querySelector('input[type="email"]').value;
+            alert(`Thank you! We've added ${email} to our newsletter.`);
+            e.target.reset();
+        });
+
+        // WhatsApp Sticky Support show after 3.5 seconds
+        setTimeout(function() {
+            var waBtn = document.createElement('a');
+            waBtn.href = 'https://wa.me/917079248804';
+            waBtn.target = '_blank';
+            waBtn.style.position = 'fixed';
+            waBtn.style.left = '32px';
+            waBtn.style.bottom = '32px';
+            waBtn.style.zIndex = '9999';
+            waBtn.style.display = 'flex';
+            waBtn.style.alignItems = 'center';
+            waBtn.style.gap = '10px';
+            waBtn.style.background = '#25d366';
+            waBtn.style.color = 'white';
+            waBtn.style.padding = '12px 18px';
+            waBtn.style.borderRadius = '40px';
+            waBtn.style.boxShadow = '0 4px 16px rgba(37,211,102,0.15)';
+            waBtn.style.textDecoration = 'none';
+            waBtn.style.fontWeight = '600';
+            waBtn.style.fontSize = '1.08rem';
+            waBtn.style.transition = 'box-shadow 0.2s';
+            waBtn.innerHTML = '<img src="download-removebg-preview.png" alt="WhatsApp" style="width: 28px; height: 28px;"> ';
+            document.body.appendChild(waBtn);
+        }, 3500);
+    </script>
+</body>
+</html>

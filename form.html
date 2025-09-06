@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Form with Google Sheets Integration</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            color: #2c3e50;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #7f8c8d;
+            font-size: 1.2rem;
+        }
+
+        .content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .form-section, .admin-section {
+            flex: 1;
+            min-width: 300px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+        }
+
+        .section-title {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #3498db;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 15px;
+        }
+
+        .form-group {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .form-control {
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+        }
+
+        textarea.form-control {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .submit-button {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 15px 20px;
+            border-radius: 6px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .submit-button:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+
+        .submit-button:active {
+            transform: translateY(0);
+        }
+
+        .admin-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .admin-controls {
+            display: flex;
+            gap: 10px;
+        }
+
+        .fetch-button {
+            background: #2ecc71;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .fetch-button:hover {
+            background: #27ae60;
+        }
+
+        .clear-button {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .clear-button:hover {
+            background: #c0392b;
+        }
+
+        .submissions-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        .submissions-table th, .submissions-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .submissions-table th {
+            background-color: #f8f9fa;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .submissions-table tr:hover {
+            background-color: #f1f8ff;
+        }
+
+        .status-message {
+            padding: 15px;
+            border-radius: 6px;
+            margin-top: 20px;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .instructions {
+            background: #f8f9fa;
+            border-left: 4px solid #3498db;
+            padding: 20px;
+            margin-top: 30px;
+            border-radius: 4px;
+        }
+
+        .instructions h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        .instructions ol {
+            padding-left: 20px;
+            line-height: 1.6;
+        }
+
+        .instructions li {
+            margin-bottom: 10px;
+        }
+
+        .instructions code {
+            background: #e9ecef;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+
+        @media (max-width: 768px) {
+            .form-row {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .content {
+                flex-direction: column;
+            }
+        }
+
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Contact Form</h1>
+            <p class="subtitle">Submit your details and manage submissions with the admin panel</p>
+        </header>
+
+        <div class="content">
+            <section class="form-section">
+                <h2 class="section-title">Contact Us</h2>
+                <form class="contact-form animate-on-scroll" id="contactForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstName" class="form-label">First Name</label>
+                            <input type="text" id="firstName" name="firstName" class="form-control" placeholder="John" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName" class="form-label">Last Name</label>
+                            <input type="text" id="lastName" name="lastName" class="form-control" placeholder="Doe" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email" class="form-label">Email Address</label>
+                        <input type="email" id="email" name="email" class="form-control" placeholder="john@example.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone" class="form-label">Phone Number</label>
+                        <input type="tel" id="phone" name="phone" class="form-control" placeholder="+91 9876543210">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="service" class="form-label">Service Interested In</label>
+                        <select id="service" name="service" class="form-control" required>
+                            <option value="">Select a service</option>
+                            <option value="web">Web Development</option>
+                            <option value="mobile">Mobile App Development</option>
+                            <option value="design">UI/UX Design</option>
+                            <option value="ecommerce">E-Commerce Solutions</option>
+                            <option value="seo">SEO & Digital Marketing</option>
+                            <option value="cloud">Cloud Solutions</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="budget" class="form-label">Project Budget</label>
+                        <select id="budget" name="budget" class="form-control">
+                            <option value="">Select budget range</option>
+                            <option value="5k-15k">₹5,000 - ₹15,000</option>
+                            <option value="15k-50k">₹15,000 - ₹50,000</option>
+                            <option value="50k-1l">₹50,000 - ₹1,00,000</option>
+                            <option value="1l+">₹1,00,000+</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message" class="form-label">Project Details</label>
+                        <textarea id="message" name="message" class="form-control" placeholder="Tell us about your project requirements, goals, and any specific features you have in mind..." required></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-button">
+                        <i class="fas fa-paper-plane"></i>
+                        Send Message
+                    </button>
+                </form>
+
+                <div id="formStatus" class="status-message hidden"></div>
+            </section>
+
+            <section class="admin-section">
+                <h2 class="section-title">Admin Panel</h2>
+                <div class="admin-panel">
+                    <div class="admin-controls">
+                        <button id="fetchData" class="fetch-button">
+                            <i class="fas fa-sync-alt"></i>
+                            Fetch Submissions
+                        </button>
+                        <button id="clearData" class="clear-button">
+                            <i class="fas fa-trash"></i>
+                            Clear View
+                        </button>
+                    </div>
+
+                    <div class="table-container">
+                        <table class="submissions-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Service</th>
+                                    <th>Budget</th>
+                                    <th>Date</th>
+                                </tr>
+                            </thead>
+                            <tbody id="submissionsBody">
+                                <tr>
+                                    <td colspan="5" style="text-align: center;">No submissions to display</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div id="adminStatus" class="status-message hidden"></div>
+                </div>
+            </section>
+        </div>
+
+        <div class="instructions">
+            <h3>How to Set Up Google Sheets Integration</h3>
+            <ol>
+                <li>Create a new Google Sheet and note its ID from the URL</li>
+                <li>Go to <a href="https://script.google.com/" target="_blank">Google Apps Script</a></li>
+                <li>Create a new project and replace the code with the provided Google Apps Script code</li>
+                <li>Deploy the script as a web app with these settings:
+                    <ul>
+                        <li>Execute as: <code>Me</code></li>
+                        <li>Who has access: <code>Anyone</code></li>
+                    </ul>
+                </li>
+                <li>Copy the web app URL and update the <code>scriptURL</code> variable in the JavaScript code below</li>
+            </ol>
+        </div>
+    </div>
+
+    <script>
+        // Configuration - Replace with your Google Apps Script URL
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbxCK_XpQGosSzXl_W4LjJglxu4S_xEJH264mFY4KAoqXeHElHb52RKvLwbFwrGiVGtL/exec';
+        
+        // DOM Elements
+        const contactForm = document.getElementById('contactForm');
+        const formStatus = document.getElementById('formStatus');
+        const fetchButton = document.getElementById('fetchData');
+        const clearButton = document.getElementById('clearData');
+        const adminStatus = document.getElementById('adminStatus');
+        const submissionsBody = document.getElementById('submissionsBody');
+
+        // Animation on scroll
+        function checkScroll() {
+            const elements = document.querySelectorAll('.animate-on-scroll');
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.3;
+                if (elementPosition < screenPosition) {
+                    element.classList.add('visible');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', checkScroll);
+        window.addEventListener('load', checkScroll);
+
+        // Form submission handler
+        contactForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const submitButton = contactForm.querySelector('button[type="submit"]');
+            const originalText = submitButton.innerHTML;
+            
+            // Update button to show loading state
+            submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+            submitButton.disabled = true;
+            
+            try {
+                const formData = new FormData(contactForm);
+                const response = await fetch(scriptURL, {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const result = await response.json();
+                
+                if (result.result === 'success') {
+                    showStatus(formStatus, 'Form submitted successfully!', 'success');
+                    contactForm.reset();
+                } else {
+                    throw new Error(result.error || 'Unknown error occurred');
+                }
+            } catch (error) {
+                console.error('Error!', error.message);
+                showStatus(formStatus, `Error: ${error.message}`, 'error');
+            } finally {
+                submitButton.innerHTML = originalText;
+                submitButton.disabled = false;
+            }
+        });
+
+        // Fetch data handler
+        fetchButton.addEventListener('click', async () => {
+            fetchButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Fetching...';
+            fetchButton.disabled = true;
+            adminStatus.classList.add('hidden');
+            
+            try {
+                // In a real implementation, you would fetch from your Google Sheets
+                // For this example, we'll use mock data
+                const mockData = [
+                    ['John Doe', 'john@example.com', 'Web Development', '₹50,000 - ₹1,00,000', '2023-05-15'],
+                    ['Jane Smith', 'jane@example.com', 'SEO & Digital Marketing', '₹15,000 - ₹50,000', '2023-05-16'],
+                    ['Robert Johnson', 'robert@example.com', 'E-Commerce Solutions', '₹1,00,000+', '2023-05-17'],
+                    ['Sarah Williams', 'sarah@example.com', 'UI/UX Design', '₹5,000 - ₹15,000', '2023-05-18'],
+                    ['Michael Brown', 'michael@example.com', 'Mobile App Development', '₹50,000 - ₹1,00,000', '2023-05-19']
+                ];
+                
+                displaySubmissions(mockData);
+                showStatus(adminStatus, 'Submissions loaded successfully', 'success');
+            } catch (error) {
+                console.error('Error fetching data:', error);
+                showStatus(adminStatus, `Error fetching data: ${error.message}`, 'error');
+            } finally {
+                fetchButton.innerHTML = '<i class="fas fa-sync-alt"></i> Fetch Submissions';
+                fetchButton.disabled = false;
+            }
+        });
+
+        // Clear data handler
+        clearButton.addEventListener('click', () => {
+            submissionsBody.innerHTML = '<tr><td colspan="5" style="text-align: center;">No submissions to display</td></tr>';
+            adminStatus.classList.add('hidden');
+        });
+
+        // Display submissions in table
+        function displaySubmissions(data) {
+            if (data.length === 0) {
+                submissionsBody.innerHTML = '<tr><td colspan="5" style="text-align: center;">No submissions found</td></tr>';
+                return;
+            }
+            
+            let tableContent = '';
+            data.forEach(row => {
+                tableContent += `
+                    <tr>
+                        <td>${row[0]}</td>
+                        <td>${row[1]}</td>
+                        <td>${row[2]}</td>
+                        <td>${row[3]}</td>
+                        <td>${row[4]}</td>
+                    </tr>
+                `;
+            });
+            
+            submissionsBody.innerHTML = tableContent;
+        }
+
+        // Show status message
+        function showStatus(element, message, type) {
+            element.textContent = message;
+            element.classList.remove('hidden', 'success', 'error');
+            element.classList.add(type);
+            
+            // Auto hide after 5 seconds
+            setTimeout(() => {
+                element.classList.add('hidden');
+            }, 5000);
+        }
+
+        // Initial check for scroll animation
+        checkScroll();
+    </script>
+</body>
+</html>

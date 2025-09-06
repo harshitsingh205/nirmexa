@@ -1,0 +1,1234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" type="image/png" href="Screenshot_2025-09-06_205354-removebg-preview.png">
+    <title>Professional Receipt Generator - Nirmexa Solutions</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #ea8b34 0%, #d97a29 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zM36 0v4h-4v2h4v4h2V2h4V0h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 2V0H4v4H0v2h4v4h2V4h4V2H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") repeat;
+            opacity: 0.3;
+        }
+
+        .header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 8px;
+            font-weight: 700;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 2fr 3fr;
+            gap: 0;
+            min-height: 70vh;
+        }
+
+        .form-section {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            padding: 40px;
+            border-right: 1px solid #e2e8f0;
+        }
+
+        .receipt-section {
+            background: white;
+            position: relative;
+        }
+
+        .section-title {
+            color: #1e293b;
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            font-weight: 700;
+            text-align: center;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+            border-radius: 2px;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #374151;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid #e5e7eb;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #f97316;
+            box-shadow: 0 0 0 4px rgba(249, 115, 22, 0.1);
+        }
+
+        .service-fields {
+            display: none;
+            animation: slideIn 0.3s ease;
+        }
+
+        .service-fields.active {
+            display: block;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+            color: white;
+            padding: 16px 32px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-top: 10px;
+            box-shadow: 0 4px 14px rgba(249, 115, 22, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(249, 115, 22, 0.4);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #059669 0%, #047857 100%);
+            box-shadow: 0 4px 14px rgba(5, 150, 105, 0.3);
+            width: auto;
+            margin: 5px;
+        }
+
+        .btn-secondary:hover {
+            box-shadow: 0 8px 25px rgba(5, 150, 105, 0.4);
+        }
+
+        .btn-share {
+            background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+            box-shadow: 0 4px 14px rgba(139, 92, 246, 0.3);
+            width: auto;
+            margin: 5px;
+        }
+
+        .btn-share:hover {
+            box-shadow: 0 8px 25px rgba(139, 92, 246, 0.4);
+        }
+
+        .receipt {
+            padding: 40px;
+            font-family: 'Inter', sans-serif;
+            height: 100%;
+            overflow-y: auto;
+        }
+
+        /* PDF-specific styles for professional single-page layout */
+        .receipt-pdf {
+            padding: 20px;
+            font-family: 'Inter', sans-serif;
+            max-width: 210mm;
+            min-height: 297mm;
+            margin: 0 auto;
+            background: white;
+            box-sizing: border-box;
+            page-break-inside: avoid;
+        }
+
+        .receipt-pdf .receipt-header {
+            text-align: center;
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid #f97316;
+            position: relative;
+        }
+
+        .receipt-pdf .company-name {
+            font-size: 2.2rem;
+            color: #1e293b;
+            font-weight: 800;
+            margin-bottom: 5px;
+            letter-spacing: -0.5px;
+        }
+
+        .receipt-pdf .receipt-title {
+            font-size: 1.1rem;
+            color: #f97316;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .receipt-pdf .receipt-number {
+            color: #6b7280;
+            font-size: 0.9rem;
+            margin-top: 10px;
+            font-weight: 500;
+        }
+
+        .receipt-pdf .receipt-date {
+            color: #6b7280;
+            font-size: 0.9rem;
+            margin-top: 3px;
+            font-weight: 500;
+        }
+
+        .receipt-pdf .receipt-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .receipt-pdf .info-block {
+            background: #f8fafc;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #f97316;
+        }
+
+        .receipt-pdf .info-block h3 {
+            color: #1e293b;
+            margin-bottom: 10px;
+            font-size: 1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .receipt-pdf .info-block p {
+            color: #4b5563;
+            margin-bottom: 5px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .receipt-pdf .services-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .receipt-pdf .services-table th {
+            background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 0.85rem;
+        }
+
+        .receipt-pdf .services-table td {
+            padding: 10px 12px;
+            border-bottom: 1px solid #e5e7eb;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .receipt-pdf .services-table tr:nth-child(even) {
+            background: #f9fafb;
+        }
+
+        .receipt-pdf .total-section {
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: right;
+            margin-bottom: 20px;
+        }
+
+        .receipt-pdf .total-amount {
+            font-size: 1.6rem;
+            font-weight: 800;
+            margin-bottom: 3px;
+        }
+
+        .receipt-pdf .total-text {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .receipt-pdf .payment-details {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #e5e7eb;
+        }
+
+        .receipt-pdf .payment-details h3 {
+            color: #1e293b;
+            margin-bottom: 12px;
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+
+        .receipt-pdf .payment-details p {
+            margin-bottom: 6px;
+            font-weight: 500;
+            color: #4b5563;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .receipt-pdf .qr-section {
+            text-align: center;
+            margin: 15px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            border: 2px dashed #f97316;
+        }
+
+        .receipt-pdf .qr-section img {
+            width: 120px;
+            height: 120px;
+            border: 2px solid #e5e7eb;
+            border-radius: 6px;
+            margin-bottom: 8px;
+        }
+
+        .receipt-pdf .footer-note {
+            text-align: center;
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 2px solid #e5e7eb;
+            color: #6b7280;
+            font-size: 0.85rem;
+            line-height: 1.5;
+        }
+
+        .receipt-pdf .footer-note strong {
+            color: #1e293b;
+        }
+
+        .receipt-header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 2px solid #e5e7eb;
+            position: relative;
+        }
+
+        .company-name {
+            font-size: 2.2rem;
+            color: #1e293b;
+            font-weight: 800;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
+
+        .receipt-title {
+            font-size: 1.3rem;
+            color: #f97316;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .receipt-number {
+            color: #6b7280;
+            font-size: 0.95rem;
+            margin-top: 15px;
+            font-weight: 500;
+        }
+
+        .receipt-date {
+            color: #6b7280;
+            font-size: 0.95rem;
+            margin-top: 5px;
+            font-weight: 500;
+        }
+
+        .receipt-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .info-block {
+            background: #f8fafc;
+            padding: 25px;
+            border-radius: 12px;
+            border-left: 4px solid #f97316;
+        }
+
+        .info-block h3 {
+            color: #1e293b;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .info-block p {
+            color: #4b5563;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .services-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .services-table th {
+            background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+            color: white;
+            padding: 18px;
+            text-align: left;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 0.9rem;
+        }
+
+        .services-table td {
+            padding: 16px 18px;
+            border-bottom: 1px solid #e5e7eb;
+            font-weight: 500;
+        }
+
+        .services-table tr:nth-child(even) {
+            background: #f9fafb;
+        }
+
+        .services-table tr:hover {
+            background: #f3f4f6;
+        }
+
+        .total-section {
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            text-align: right;
+            margin-bottom: 30px;
+        }
+
+        .total-amount {
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 5px;
+        }
+
+        .total-text {
+            font-size: 0.95rem;
+            opacity: 0.8;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .payment-details {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            border: 1px solid #e5e7eb;
+        }
+
+        .payment-details h3 {
+            color: #1e293b;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+
+        .payment-details p {
+            margin-bottom: 10px;
+            font-weight: 500;
+            color: #4b5563;
+        }
+
+        .qr-code {
+            text-align: center;
+            margin: 25px 0;
+            padding: 25px;
+            background: white;
+            border-radius: 12px;
+            border: 2px dashed #f97316;
+        }
+
+        .qr-placeholder {
+            width: 120px;
+            height: 120px;
+            background: #f3f4f6;
+            border: 2px solid #e5e7eb;
+            margin: 0 auto 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            font-size: 2rem;
+            color: #6b7280;
+        }
+
+        .receipt-actions {
+            text-align: center;
+            padding: 30px;
+            background: #f8fafc;
+            border-top: 1px solid #e5e7eb;
+            display: none;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .receipt-actions.show {
+            display: flex !important;
+        }
+
+        .welcome-content {
+            text-align: center;
+            padding: 80px 40px;
+            color: #6b7280;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .welcome-icon {
+            font-size: 4rem;
+            margin-bottom: 25px;
+            color: #f97316;
+        }
+
+        .welcome-title {
+            color: #1e293b;
+            margin-bottom: 15px;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .welcome-text {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .features-box {
+            margin-top: 40px;
+            padding: 30px;
+            background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
+            border-radius: 16px;
+            border: 2px solid #e5e7eb;
+        }
+
+        .features-title {
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+
+        .feature-item {
+            margin: 12px 0;
+            font-size: 1rem;
+            color: #4b5563;
+            font-weight: 500;
+        }
+
+        .footer-note {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 25px;
+            border-top: 2px solid #e7e7eb;
+            color: #6b7280;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .footer-note strong {
+            color: #1e293b;
+        }
+
+        @media (max-width: 1024px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .form-section {
+                border-right: none;
+                border-bottom: 1px solid #e2e8f0;
+            }
+            
+            .header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .receipt-info {
+                grid-template-columns: 1fr;
+            }
+
+            .receipt-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn-secondary, .btn-share {
+                width: 200px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                border-radius: 12px;
+            }
+            
+            .header {
+                padding: 30px 20px;
+            }
+            
+            .form-section,
+            .receipt {
+                padding: 30px 20px;
+            }
+        }
+
+        @media print {
+            body {
+                background: white;
+                margin: 0;
+                padding: 0;
+            }
+            
+            .container {
+                box-shadow: none;
+                border-radius: 0;
+                max-width: none;
+            }
+            
+            .header, .form-section, .receipt-actions {
+                display: none;
+            }
+            
+            .main-content {
+                display: block;
+                grid-template-columns: none;
+            }
+            
+            .receipt-section {
+                background: white;
+            }
+            
+            .receipt {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>NIRMEXA SOLUTIONS</h1>
+           
+        </div>
+
+        <div class="main-content">
+            <div class="form-section">
+                <h2 class="section-title">Generate Receipt</h2>
+                
+                <div class="form-group">
+                    <label for="serviceType">Service Type</label>
+                    <select id="serviceType" onchange="showServiceFields()">
+                        <option value="">Select Service</option>
+                        <option value="web-dev">Web Development</option>
+                        <option value="mobile-app">Mobile App Development</option>
+                        <option value="ui-ux">UI/UX Design</option>
+                        <option value="seo">SEO & Digital Marketing</option>
+                        <option value="ecommerce">E-Commerce Solutions</option>
+                        <option value="cloud">Cloud Solutions</option>
+                        <option value="custom">Custom Service</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="clientName">Client Name *</label>
+                    <input type="text" id="clientName" placeholder="Enter client name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="clientEmail">Client Email (Optional)</label>
+                    <input type="email" id="clientEmail" placeholder="Enter client email">
+                </div>
+
+                <div class="form-group">
+                    <label for="clientPhone">Client Phone</label>
+                    <input type="tel" id="clientPhone" placeholder="Enter client phone">
+                </div>
+
+                <div class="form-group">
+                    <label for="clientAddress">Client Address</label>
+                    <textarea id="clientAddress" placeholder="Enter client address" rows="3"></textarea>
+                </div>
+
+                <!-- Web Development Fields -->
+                <div id="web-dev-fields" class="service-fields">
+                    <div class="form-group">
+                        <label for="webDevCharge">Development Charge (₹)</label>
+                        <input type="number" id="webDevCharge" placeholder="Enter development charge">
+                    </div>
+                    <div class="form-group">
+                        <label for="domainCharge">Domain Registration (₹)</label>
+                        <input type="number" id="domainCharge" placeholder="Enter domain charge">
+                    </div>
+                    <div class="form-group">
+                        <label for="hostingCharge">Hosting Service (₹)</label>
+                        <input type="number" id="hostingCharge" placeholder="Enter hosting charge">
+                    </div>
+                    <div class="form-group">
+                        <label for="maintenanceCharge">Maintenance Service (₹)</label>
+                        <input type="number" id="maintenanceCharge" placeholder="Enter maintenance charge">
+                    </div>
+                </div>
+
+                <!-- Mobile App Fields -->
+                <div id="mobile-app-fields" class="service-fields">
+                    <div class="form-group">
+                        <label for="appDevCharge">App Development (₹)</label>
+                        <input type="number" id="appDevCharge" placeholder="Enter app development charge">
+                    </div>
+                    <div class="form-group">
+                        <label for="appStoreCharge">App Store Publishing (₹)</label>
+                        <input type="number" id="appStoreCharge" placeholder="Enter app store setup charge">
+                    </div>
+                    <div class="form-group">
+                        <label for="appMaintenanceCharge">App Maintenance (₹)</label>
+                        <input type="number" id="appMaintenanceCharge" placeholder="Enter maintenance charge">
+                    </div>
+                </div>
+
+                <!-- UI/UX Fields -->
+                <div id="ui-ux-fields" class="service-fields">
+                    <div class="form-group">
+                        <label for="designCharge">Design Service (₹)</label>
+                        <input type="number" id="designCharge" placeholder="Enter design charge">
+                    </div>
+                    <div class="form-group">
+                        <label for="prototypeCharge">Prototype Development (₹)</label>
+                        <input type="number" id="prototypeCharge" placeholder="Enter prototype charge">
+                    </div>
+                    <div class="form-group">
+                        <label for="researchCharge">User Research (₹)</label>
+                        <input type="number" id="researchCharge" placeholder="Enter research charge">
+                    </div>
+                </div>
+
+                <!-- SEO Fields -->
+                <div id="seo-fields" class="service-fields">
+                    <div class="form-group">
+                        <label for="seoCharge">SEO Optimization (₹)</label>
+                        <input type="number" id="seoCharge" placeholder="Enter SEO charge">
+                    </div>
+                    <div class="form-group">
+                        <label for="marketingCharge">Digital Marketing (₹)</label>
+                        <input type="number" id="marketingCharge" placeholder="Enter marketing charge">
+                    </div>
+                </div>
+
+                <!-- E-Commerce Fields -->
+                <div id="ecommerce-fields" class="service-fields">
+                    <div class="form-group">
+                        <label for="ecomDevCharge">E-Commerce Development (₹)</label>
+                        <input type="number" id="ecomDevCharge" placeholder="Enter e-commerce charge">
+                    </div>
+                    <div class="form-group">
+                        <label for="paymentSetupCharge">Payment Gateway Setup (₹)</label>
+                        <input type="number" id="paymentSetupCharge" placeholder="Enter payment setup charge">
+                    </div>
+                </div>
+
+                <!-- Cloud Fields -->
+                <div id="cloud-fields" class="service-fields">
+                    <div class="form-group">
+                        <label for="cloudSetupCharge">Cloud Setup (₹)</label>
+                        <input type="number" id="cloudSetupCharge" placeholder="Enter cloud setup charge">
+                    </div>
+                    <div class="form-group">
+                        <label for="migrationCharge">Data Migration (₹)</label>
+                        <input type="number" id="migrationCharge" placeholder="Enter migration charge">
+                    </div>
+                </div>
+
+                <!-- Custom Service Fields -->
+                <div id="custom-fields" class="service-fields">
+                    <div class="form-group">
+                        <label for="customServiceName">Service Name</label>
+                        <input type="text" id="customServiceName" placeholder="Enter service name">
+                    </div>
+                    <div class="form-group">
+                        <label for="customServiceCharge">Service Charge (₹)</label>
+                        <input type="number" id="customServiceCharge" placeholder="Enter service charge">
+                    </div>
+                    <div class="form-group">
+                        <label for="customServiceDesc">Service Description</label>
+                        <textarea id="customServiceDesc" placeholder="Enter service description" rows="3"></textarea>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="paymentMethod">Payment Method</label>
+                    <select id="paymentMethod">
+                        <option value="upi">UPI Payment</option>
+                        <option value="bank">Bank Transfer</option>
+                        <option value="card">Credit/Debit Card</option>
+                        <option value="paypal">PayPal</option>
+                        <option value="cash">Cash Payment</option>
+                    </select>
+                </div>
+
+                <button class="btn" onclick="generateReceipt()">Generate Professional Receipt</button>
+                <div class="receipt-actions" id="receiptActions">
+                    <button class="btn btn-secondary" onclick="downloadPDF()">📄 Download PDF</button>
+                    <button class="btn btn-share" onclick="shareAsImage()">📱 Share as Image</button>
+                </div>
+            </div>
+
+            <div class="receipt-section">
+                <div id="receiptContent" class="receipt">
+                    <div class="welcome-content">
+                        <div class="welcome-icon">📄</div>
+                        <h3 class="welcome-title">Professional Receipt Generator</h3>
+                        <p class="welcome-text">Create professional invoices and receipts for your business</p>
+                        <p class="welcome-text">Fill out the form to generate a detailed receipt with all necessary business information</p>
+                        
+                        <div class="features-box">
+                            <p class="features-title">Features Include:</p>
+                            <div class="feature-item">• Professional business formatting</div>
+                            <div class="feature-item">• Detailed service breakdown</div>
+                            <div class="feature-item">• Multiple payment method support</div>
+                            <div class="feature-item">• Secure payment information</div>
+                            <div class="feature-item">• Professional branding</div>
+                            <div class="feature-item">• PDF & Image download options</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showServiceFields() {
+            const serviceType = document.getElementById('serviceType').value;
+            const allFields = document.querySelectorAll('.service-fields');
+            
+            allFields.forEach(field => field.classList.remove('active'));
+            
+            if (serviceType && serviceType !== 'custom') {
+                const targetField = document.getElementById(serviceType + '-fields');
+                if (targetField) {
+                    targetField.classList.add('active');
+                }
+            } else if (serviceType === 'custom') {
+                document.getElementById('custom-fields').classList.add('active');
+            }
+        }
+
+        function generateReceipt() {
+            const serviceType = document.getElementById('serviceType').value;
+            const clientName = document.getElementById('clientName').value;
+            const clientEmail = document.getElementById('clientEmail').value;
+            const clientPhone = document.getElementById('clientPhone').value;
+            const clientAddress = document.getElementById('clientAddress').value;
+            const paymentMethod = document.getElementById('paymentMethod').value;
+
+            if (!serviceType || !clientName) {
+                alert('Please fill required fields (Service Type and Client Name)');
+                return;
+            }
+
+            const receiptNumber = 'NXS-' + Date.now().toString().slice(-8);
+            const currentDate = new Date().toLocaleDateString('en-IN', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+            
+            let services = [];
+            let total = 0;
+
+            // Get service-specific charges based on service type
+            switch (serviceType) {
+                case 'web-dev':
+                    const webDevCharge = parseFloat(document.getElementById('webDevCharge').value) || 0;
+                    const domainCharge = parseFloat(document.getElementById('domainCharge').value) || 0;
+                    const hostingCharge = parseFloat(document.getElementById('hostingCharge').value) || 0;
+                    const maintenanceCharge = parseFloat(document.getElementById('maintenanceCharge').value) || 0;
+                    
+                    if (webDevCharge > 0) services.push({ name: 'Web Development Service', amount: webDevCharge });
+                    if (domainCharge > 0) services.push({ name: 'Domain Registration', amount: domainCharge });
+                    if (hostingCharge > 0) services.push({ name: 'Web Hosting Service', amount: hostingCharge });
+                    if (maintenanceCharge > 0) services.push({ name: 'Website Maintenance', amount: maintenanceCharge });
+                    break;
+                    
+                case 'mobile-app':
+                    const appDevCharge = parseFloat(document.getElementById('appDevCharge').value) || 0;
+                    const appStoreCharge = parseFloat(document.getElementById('appStoreCharge').value) || 0;
+                    const appMaintenanceCharge = parseFloat(document.getElementById('appMaintenanceCharge').value) || 0;
+                    
+                    if (appDevCharge > 0) services.push({ name: 'Mobile App Development', amount: appDevCharge });
+                    if (appStoreCharge > 0) services.push({ name: 'App Store Publishing', amount: appStoreCharge });
+                    if (appMaintenanceCharge > 0) services.push({ name: 'App Maintenance Service', amount: appMaintenanceCharge });
+                    break;
+                    
+                case 'ui-ux':
+                    const designCharge = parseFloat(document.getElementById('designCharge').value) || 0;
+                    const prototypeCharge = parseFloat(document.getElementById('prototypeCharge').value) || 0;
+                    const researchCharge = parseFloat(document.getElementById('researchCharge').value) || 0;
+                    
+                    if (designCharge > 0) services.push({ name: 'UI/UX Design Service', amount: designCharge });
+                    if (prototypeCharge > 0) services.push({ name: 'Prototype Development', amount: prototypeCharge });
+                    if (researchCharge > 0) services.push({ name: 'User Research & Analysis', amount: researchCharge });
+                    break;
+                    
+                case 'seo':
+                    const seoCharge = parseFloat(document.getElementById('seoCharge').value) || 0;
+                    const marketingCharge = parseFloat(document.getElementById('marketingCharge').value) || 0;
+                    
+                    if (seoCharge > 0) services.push({ name: 'SEO Optimization Service', amount: seoCharge });
+                    if (marketingCharge > 0) services.push({ name: 'Digital Marketing Service', amount: marketingCharge });
+                    break;
+                    
+                case 'ecommerce':
+                    const ecomDevCharge = parseFloat(document.getElementById('ecomDevCharge').value) || 0;
+                    const paymentSetupCharge = parseFloat(document.getElementById('paymentSetupCharge').value) || 0;
+                    
+                    if (ecomDevCharge > 0) services.push({ name: 'E-Commerce Development', amount: ecomDevCharge });
+                    if (paymentSetupCharge > 0) services.push({ name: 'Payment Gateway Setup', amount: paymentSetupCharge });
+                    break;
+                    
+                case 'cloud':
+                    const cloudSetupCharge = parseFloat(document.getElementById('cloudSetupCharge').value) || 0;
+                    const migrationCharge = parseFloat(document.getElementById('migrationCharge').value) || 0;
+                    
+                    if (cloudSetupCharge > 0) services.push({ name: 'Cloud Infrastructure Setup', amount: cloudSetupCharge });
+                    if (migrationCharge > 0) services.push({ name: 'Data Migration Service', amount: migrationCharge });
+                    break;
+                    
+                case 'custom':
+                    const customServiceName = document.getElementById('customServiceName').value || 'Custom Service';
+                    const customServiceCharge = parseFloat(document.getElementById('customServiceCharge').value) || 0;
+                    
+                    if (customServiceCharge > 0) services.push({ name: customServiceName, amount: customServiceCharge });
+                    break;
+            }
+
+            total = services.reduce((sum, service) => sum + service.amount, 0);
+
+            if (total === 0) {
+                alert('Please enter at least one service charge amount');
+                return;
+            }
+
+            // Generate payment details based on selected method
+            let paymentDetails = '';
+            let qrCode = '';
+            
+            switch (paymentMethod) {
+                case 'upi':
+                    paymentDetails = `
+                        <h3>UPI Payment Details</h3>
+                        <p><strong>UPI ID:</strong> BHARATPE.8Q0R0E9J9T03476@fbpe</p>
+                        <p><strong>Merchant Name:</strong> Nirmexa Solutions</p>
+                        <p><strong>Amount:</strong> ₹${total.toLocaleString('en-IN')}</p>
+                       
+                    `;
+                           qrCode = generateQRCode('bank');
+                    break;
+                case 'bank':
+                    paymentDetails = `
+                        <h3>Bank Transfer Details</h3>
+                        <p><strong>Account Name:</strong> Nirmexa Solutions Private Limited</p>
+                        <p><strong>Account Number:</strong> 1449370136</p>
+                        <p><strong>IFSC Code:</strong> KKBK0005304</p>
+                        <p><strong>Bank Name:</strong> Kotak Mahindra Bank</p>
+                        <p><strong>Amount:</strong> ₹${total.toLocaleString('en-IN')}</p>
+                    `;
+                    qrCode = generateQRCode('bank');
+                    break;
+                case 'card':
+                    paymentDetails = `
+                        <h3>Card Payment Details</h3>
+                        <p><strong>Card Holder:</strong> Nirmexa Solutions</p>
+                        <p><strong>Amount:</strong> ₹${total.toLocaleString('en-IN')}</p>
+                    `;
+                    qrCode = generateQRCode('card');
+                    break;
+                case 'paypal':
+                    paymentDetails = `
+                        <h3>PayPal Payment Details</h3>
+                        <p><strong>PayPal ID:</strong> https://www.paypal.me/harshitkishore26</p>
+                        <p><strong>Amount:</strong> ₹${total.toLocaleString('en-IN')}</p>
+                    `;
+                    qrCode = generateQRCode('paypal');
+                    break;
+                case 'cash':
+                    paymentDetails = `
+                        <h3>Cash Payment</h3>
+                        <p><strong>Amount:</strong> ₹${total.toLocaleString('en-IN')}</p>
+                        <p>Please visit our office to complete the payment.</p>
+                    `;
+                    break;
+            }
+
+            // Generate receipt content with more professional details
+            const receiptHTML = `
+                <div class="receipt-header">
+                    <h1 class="company-name">NIRMEXA SOLUTIONS</h1>
+                    <p class="receipt-title">Official Receipt</p>
+                    <p class="receipt-number">Receipt No: ${receiptNumber}</p>
+                    <p class="receipt-date">Date: ${currentDate}</p>
+                </div>
+                <div class="receipt-info">
+                    <div class="info-block">
+                        <h3>Client Information</h3>
+                        <p><strong>Name:</strong> ${clientName}</p>
+                        ${clientEmail ? `<p><strong>Email:</strong> ${clientEmail}</p>` : ''}
+                        <p><strong>Phone:</strong> ${clientPhone || 'N/A'}</p>
+                        <p><strong>Address:</strong> ${clientAddress || 'N/A'}</p>
+                    </div>
+                    <div class="info-block">
+                        <h3>Company Information</h3>
+                        <p><strong>Company:</strong> Nirmexa Solutions Pvt. Ltd.</p>
+                        <p><strong>Contact:</strong> nirmexa@gmail.com | +91-7079248804</p>
+                        <p><strong>Address:</strong> Knowledge Park 2, Delhi, India</p>
+                    </div>
+                </div>
+                <table class="services-table">
+                    <thead>
+                        <tr>
+                            <th>Service</th>
+                            <th>Amount (₹)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${services.map(service => `<tr><td>${service.name}</td><td>${service.amount.toLocaleString('en-IN')}</td></tr>`).join('')}
+                    </tbody>
+                </table>
+                <div class="total-section">
+                    <p class="total-amount">₹${total.toLocaleString('en-IN')}</p>
+                    <p class="total-text">Total Amount</p>
+                </div>
+                <div class="payment-details">
+                    ${paymentDetails}
+                </div>
+                ${paymentMethod === 'upi' ? `<div class='qr-section'><img src='https://via.placeholder.com/150' alt='UPI QR Code'><p>Scan the QR code to pay via UPI</p></div>` : ''}
+                <div class="footer-note">
+                    <p><strong>Thank you for choosing Nirmexa Solutions!</strong></p>
+                    <p>For any queries, contact us at:  nirmexa@gmail.com | +91-7079248804</p>
+                    <p><strong>Terms:</strong> This receipt is computer generated and does not require a signature. All payments are non-refundable unless stated otherwise. Please retain this receipt for your records.</p>
+                </div>
+            `;
+
+            // Update receipt content
+            const receiptContent = document.getElementById('receiptContent');
+            receiptContent.innerHTML = receiptHTML;
+
+            // Show receipt actions
+            const receiptActions = document.getElementById('receiptActions');
+            if (receiptActions) {
+                receiptActions.classList.add('show');
+            }
+        }
+
+        function generateQRCode(method) {
+            const qrIcons = {
+                'upi': '📱',
+                'bank': '🏦',
+                'card': '💳',
+                'paypal': '💰'
+            };
+            return `<div class="qr-placeholder">${qrIcons[method] || '💼'}</div><p>Scan to Pay</p>`;
+        }
+
+        // Function to download receipt as PDF
+        function downloadPDF() {
+            const receiptContent = document.getElementById('receiptContent');
+            const receiptActions = document.getElementById('receiptActions');
+            receiptActions.classList.remove('show');
+            // Create a wrapper for PDF styling
+            const pdfWrapper = document.createElement('div');
+            pdfWrapper.className = 'receipt-pdf';
+            pdfWrapper.style.display = 'block';
+            pdfWrapper.style.margin = '0';
+            pdfWrapper.style.paddingTop = '0';
+            pdfWrapper.style.justifyContent = 'flex-start';
+            pdfWrapper.style.alignItems = 'flex-start';
+            pdfWrapper.innerHTML = receiptContent.innerHTML;
+            document.body.appendChild(pdfWrapper);
+            window.scrollTo(0, 0); // Ensure top alignment
+            // PDF options for single page
+            const options = {
+                margin: 0,
+                filename: `Nirmexa-Receipt-${Date.now()}.pdf`,
+                image: { type: 'jpeg', quality: 1.0 },
+                html2canvas: {
+                    scale: 2,
+                    useCORS: true,
+                    letterRendering: true,
+                    allowTaint: true,
+                    backgroundColor: '#fff'
+                },
+                jsPDF: {
+                    unit: 'pt',
+                    format: 'a4',
+                    orientation: 'portrait',
+                    compress: true
+                }
+            };
+            html2pdf().set(options).from(pdfWrapper).save().then(() => {
+                receiptActions.classList.add('show');
+                document.body.removeChild(pdfWrapper);
+            });
+        }
+
+        // Enhanced Image Share function
+        function shareAsImage() {
+            const receiptContent = document.getElementById('receiptContent');
+            
+            if (!receiptContent || receiptContent.innerHTML.includes('welcome-content')) {
+                alert('Please generate a receipt first!');
+                return;
+            }
+
+            const options = {
+                scale: 3,
+                useCORS: true,
+                allowTaint: true,
+                backgroundColor: '#ffffff',
+                width: receiptContent.scrollWidth,
+                height: receiptContent.scrollHeight,
+                scrollX: 0,
+                scrollY: 0
+            };
+
+            html2canvas(receiptContent, options).then(canvas => {
+                const dataURL = canvas.toDataURL('image/jpeg', 0.95);
+                const filename = `${document.querySelector('.receipt-number')?.textContent?.replace('Receipt No: ', '') || 'Receipt'}-Nirmexa.jpg`;
+
+                if (navigator.share && navigator.canShare) {
+                    fetch(dataURL)
+                        .then(res => res.blob())
+                        .then(blob => {
+                            const file = new File([blob], filename, { type: "image/jpeg" });
+                            navigator.share({
+                                files: [file],
+                                title: 'Nirmexa Solutions Receipt',
+                                text: 'Here is your official receipt from Nirmexa Solutions.'
+                            }).catch(err => {
+                                console.log("Share failed:", err);
+                                downloadImage(dataURL, filename);
+                            });
+                        });
+                } else {
+                    downloadImage(dataURL, filename);
+                }
+            }).catch(error => {
+                console.error('Image generation failed:', error);
+                alert('Image generation failed. Please try again.');
+            });
+        }
+
+        function downloadImage(dataURL, filename) {
+            const link = document.createElement('a');
+            link.href = dataURL;
+            link.download = filename;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+    </script>
+</body>
+</html>
