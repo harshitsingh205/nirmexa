@@ -320,6 +320,59 @@
             }
         }
 
+        @media (max-width: 600px) {
+    .admin-header {
+        flex-direction: column;
+        gap: 10px;
+        padding: 14px 8px;
+        text-align: center;
+    }
+    .logo h1 {
+        font-size: 1.1rem;
+    }
+    .logo img {
+        height: 28px !important;
+        width: 28px !important;
+    }
+    .admin-nav {
+        flex-direction: column;
+        gap: 8px;
+    }
+    .admin-content {
+        padding: 12px;
+    }
+    .auth-form {
+        padding: 16px;
+    }
+    .auth-title h2 {
+        font-size: 1.2rem;
+    }
+    .form-control {
+        font-size: 1rem;
+        padding: 10px 8px;
+    }
+    .auth-button {
+        padding: 10px;
+        font-size: 1rem;
+    }
+    .stats-container {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+    .stat-card {
+        padding: 10px;
+        font-size: 0.95rem;
+    }
+    .submissions-table th, .submissions-table td {
+        padding: 8px 6px;
+        font-size: 0.95rem;
+    }
+    .modal-content {
+        padding: 12px;
+        font-size: 0.95rem;
+    }
+}
+
         .user-info {
             display: flex;
             align-items: center;
@@ -383,7 +436,7 @@
     <div class="admin-container">
         <header class="admin-header">
             <div class="logo">
-                <i class="fas fa-chart-line"></i>
+                <img src="Screenshot_2025-09-06_205354-removebg-preview.png" alt="Logo" style="height:32px;width:32px;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.08);object-fit:cover;">
                 <h1>Nirmexa Solutions Admin</h1>
             </div>
          
@@ -777,7 +830,7 @@
         receiptDiv.innerHTML = `<button id="generateReceiptBtn" class="control-button fetch-button" style="background: #059669; color: white; margin-top: 10px;"><i class="fas fa-file-invoice"></i> Generate Receipt</button>`;
         dashboardSection.insertBefore(receiptDiv, dashboardSection.firstChild);
         document.getElementById('generateReceiptBtn').addEventListener('click', () => {
-            window.location.href = 'receipt.html';
+            window.location.href = 'recipt.html';
         });
     </script>
 </body>
