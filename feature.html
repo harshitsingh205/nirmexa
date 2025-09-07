@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nirmexa Solution - Policy & Features</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #ff6b35, #f7931e, #ffffff);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(255, 107, 53, 0.2);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #ff6b35, #f7931e);
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: repeating-conic-gradient(from 0deg, transparent 0deg, rgba(255,255,255,0.1) 1deg, transparent 2deg);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            100% { transform: rotate(360deg); }
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .logo {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            padding: 40px;
+        }
+
+        .form-section {
+            background: #fff;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.1);
+            border: 2px solid #ffe8e0;
+        }
+
+        .form-section h2 {
+            color: #ff6b35;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ffe8e0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #ff6b35;
+            box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .generate-btn {
+            background: linear-gradient(135deg, #ff6b35, #f7931e);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .generate-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255, 107, 53, 0.3);
+        }
+
+        .policy-preview {
+            background: #fff;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.1);
+            border: 2px solid #ffe8e0;
+        }
+
+        .policy-preview h2 {
+            color: #ff6b35;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+
+        .policy-section {
+            margin-bottom: 25px;
+            padding: 20px;
+            background: #fef9f6;
+            border-radius: 10px;
+            border-left: 4px solid #ff6b35;
+        }
+
+        .policy-section h3 {
+            color: #ff6b35;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .policy-section ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .policy-section li {
+            margin-bottom: 8px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .policy-section li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #ff6b35;
+            font-weight: bold;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .service-card {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(255, 107, 53, 0.1);
+            border: 1px solid #ffe8e0;
+        }
+
+        .service-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .floating-elements {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .floating-element {
+            position: absolute;
+            background: linear-gradient(45deg, #ff6b35, #f7931e);
+            border-radius: 50%;
+            opacity: 0.1;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .floating-element:nth-child(1) {
+            width: 80px;
+            height: 80px;
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .floating-element:nth-child(2) {
+            width: 60px;
+            height: 60px;
+            top: 60%;
+            right: 15%;
+            animation-delay: 2s;
+        }
+
+        .floating-element:nth-child(3) {
+            width: 100px;
+            height: 100px;
+            bottom: 20%;
+            left: 20%;
+            animation-delay: 4s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                padding: 20px;
+            }
+
+            .header {
+                padding: 30px 20px;
+            }
+
+            .logo {
+                font-size: 2rem;
+            }
+
+            .form-section,
+            .policy-preview {
+                padding: 20px;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                margin: 4px;
+                border-radius: 8px;
+                max-width: 100vw;
+                box-shadow: 0 8px 24px rgba(0,0,0,0.10);
+            }
+            .header {
+                padding: 18px 8px;
+                font-size: 1.1rem;
+                text-align: center;
+            }
+            .header-content img {
+                height: 28px !important;
+                width: 28px !important;
+                margin-bottom: 4px !important;
+            }
+            .logo {
+                font-size: 1.2rem !important;
+                margin-bottom: 4px !important;
+            }
+            .subtitle {
+                font-size: 1rem !important;
+            }
+            .main-content {
+                grid-template-columns: 1fr;
+                gap: 16px;
+                padding: 10px;
+            }
+            .form-section,
+            .policy-preview {
+                padding: 10px !important;
+                border-radius: 8px !important;
+            }
+            .form-section h2,
+            .policy-preview h2 {
+                font-size: 1.1rem !important;
+                margin-bottom: 10px !important;
+            }
+            .form-group label {
+                font-size: 0.95rem !important;
+            }
+            .form-group input,
+            .form-group select,
+            .form-group textarea {
+                font-size: 0.95rem !important;
+                padding: 8px !important;
+                border-radius: 6px !important;
+            }
+            .generate-btn {
+                padding: 10px 18px !important;
+                font-size: 1rem !important;
+                border-radius: 8px !important;
+            }
+            .policy-section {
+                padding: 10px !important;
+                border-radius: 6px !important;
+                margin-bottom: 10px !important;
+            }
+            .policy-section h3 {
+                font-size: 1rem !important;
+                margin-bottom: 8px !important;
+            }
+            .services-grid {
+                grid-template-columns: 1fr !important;
+                gap: 8px !important;
+            }
+            .service-card {
+                padding: 8px !important;
+                border-radius: 6px !important;
+                font-size: 0.95rem !important;
+            }
+            .service-icon {
+                font-size: 1.2rem !important;
+                margin-bottom: 4px !important;
+            }
+            .success-message {
+                font-size: 0.95rem !important;
+                padding: 8px !important;
+                border-radius: 6px !important;
+            }
+        }
+
+        .success-message {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            text-align: center;
+            display: none;
+            animation: slideIn 0.5s ease;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-elements">
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <div class="header-content">
+                <img src="Screenshot_2025-09-06_205354-removebg-preview.png" alt="Logo" style="height:38px;width:38px;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.08);object-fit:cover;vertical-align:middle;margin-bottom:8px;">
+                <div class="logo">Nirmexa Solution</div>
+                <div class="subtitle">Professional Web & Digital Solutions</div>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="form-section">
+                <h2>📋 Client Information</h2>
+                <form id="clientForm">
+                    <div class="form-group">
+                        <label for="clientName">Client Name *</label>
+                        <input type="text" id="clientName" name="clientName" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" name="phone">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="service">Required Service *</label>
+                        <select id="service" name="service" required>
+                            <option value="">Select Service</option>
+                            <option value="web-dev">Web Development</option>
+                            <option value="mobile-app">Mobile App Development</option>
+                            <option value="ui-ux">UI/UX Design</option>
+                            <option value="seo">SEO & Digital Marketing</option>
+                            <option value="ecommerce">E-Commerce Solutions</option>
+                            <option value="cloud">Cloud Solutions</option>
+                            <option value="custom">Custom Service</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="features">Features We Provide</label>
+                        <textarea id="features" name="features" placeholder="Describe the features and services we will provide for this project..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="timeline">Project Timeline</label>
+                        <input type="text" id="timeline" name="timeline" placeholder="e.g., 4-6 weeks">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="budget">Project Budget</label>
+                        <input type="text" id="budget" name="budget" placeholder="e.g., $5000 - $8000">
+                    </div>
+
+                    <button type="submit" class="generate-btn">
+                        📄 Generate Professional PDF
+                    </button>
+                </form>
+
+                <div id="successMessage" class="success-message">
+                    ✅ PDF Generated Successfully! Check your downloads folder.
+                </div>
+            </div>
+
+            <div class="policy-preview">
+                <h2>📋 Company Policies</h2>
+                
+                <div class="policy-section">
+                    <h3>💼 Project Work Policy</h3>
+                    <ul>
+                        <li>Work begins only after 50% advance payment</li>
+                        <li>Remaining 50% to be cleared before final delivery</li>
+                        <li>Project timeline and milestones discussed and approved before starting</li>
+                        <li>Additional features (not in original scope) charged separately</li>
+                    </ul>
+                </div>
+
+                <div class="policy-section">
+                    <h3>🔄 Updates & Maintenance Policy</h3>
+                    <ul>
+                        <li><strong>Free Updates:</strong> Minor updates free for first month</li>
+                        <li><strong>Paid Updates:</strong> Major updates charged based on complexity</li>
+                        <li><strong>Annual Maintenance:</strong> Optional AMC available for continuous support</li>
+                    </ul>
+                </div>
+
+                <div class="policy-section">
+                    <h3>✏️ Revision Policy</h3>
+                    <ul>
+                        <li>2 free revisions included per project</li>
+                        <li>Extra revisions beyond that will be chargeable</li>
+                    </ul>
+                </div>
+
+                <div class="policy-section">
+                    <h3>💰 Refund & Cancellation</h3>
+                    <ul>
+                        <li>Advance payment non-refundable once project starts</li>
+                        <li>100% refund possible if cancelled before work starts</li>
+                    </ul>
+                </div>
+
+                <div class="policy-section">
+                    <h3>🚀 Delivery & Support</h3>
+                    <ul>
+                        <li>Final delivery includes source files and documentation</li>
+                        <li>Post-delivery support via email, WhatsApp, or call</li>
+                    </ul>
+                </div>
+
+                <h2>🛠️ Our Services</h2>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-icon">🌐</div>
+                        <div>Web Development</div>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">📱</div>
+                        <div>Mobile Apps</div>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">🎨</div>
+                        <div>UI/UX Design</div>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">📈</div>
+                        <div>SEO & Marketing</div>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">🛒</div>
+                        <div>E-Commerce</div>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">☁️</div>
+                        <div>Cloud Solutions</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('clientForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            generatePDF();
+        });
+
+        function generatePDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+
+            // Get form data
+            const clientName = document.getElementById('clientName').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const service = document.getElementById('service').value;
+            const serviceText = document.getElementById('service').options[document.getElementById('service').selectedIndex].text;
+            const features = document.getElementById('features').value;
+            const timeline = document.getElementById('timeline').value;
+            const budget = document.getElementById('budget').value;
+
+            // Set colors
+            const orangeColor = [255, 107, 53];
+            const lightOrange = [255, 235, 225];
+            const darkColor = [51, 51, 51];
+            const grayColor = [128, 128, 128];
+
+            // Page 1 - Header with Logo and Branding
+            doc.setFillColor(...orangeColor);
+            doc.rect(0, 0, 210, 45, 'F');
+            
+            // Company Logo Section
+            doc.setTextColor(255, 255, 255);
+            doc.setFontSize(28);
+            doc.setFont('helvetica', 'bold');
+            doc.text('NIRMEXA SOLUTION', 20, 25);
+            
+            doc.setFontSize(14);
+            doc.setFont('helvetica', 'normal');
+            doc.text('Professional Web & Digital Solutions', 20, 35);
+
+            // Date
+            const today = new Date();
+            const dateStr = today.toLocaleDateString('en-GB');
+            doc.setFontSize(10);
+            doc.text(`Date: ${dateStr}`, 150, 35);
+
+            let yPosition = 60;
+
+            // Client Information Section with Table
+            doc.setFillColor(...lightOrange);
+            doc.rect(15, yPosition - 5, 180, 12, 'F');
+            
+            doc.setTextColor(...darkColor);
+            doc.setFontSize(16);
+            doc.setFont('helvetica', 'bold');
+            doc.text('CLIENT INFORMATION', 20, yPosition + 3);
+
+            yPosition += 20;
+
+            // Client Info Table
+            const clientData = [
+                ['Field', 'Details'],
+                ['Client Name', clientName || 'Not specified'],
+                ['Email Address', email || 'Not provided'],
+                ['Phone Number', phone || 'Not provided'],
+                ['Required Service', serviceText !== 'Select Service' ? serviceText : 'Not selected'],
+                ['Project Timeline', timeline || 'To be discussed'],
+                ['Estimated Budget', budget ? `${budget}` : 'To be discussed']
+            ];
+
+            // Draw client info table
+            drawTable(doc, clientData, 20, yPosition, 170, 8);
+            yPosition += clientData.length * 8 + 15;
+
+            // Features Section
+            if (features && features.trim()) {
+                doc.setFillColor(...lightOrange);
+                doc.rect(15, yPosition - 5, 180, 12, 'F');
+                
+                doc.setTextColor(...darkColor);
+                doc.setFontSize(16);
+                doc.setFont('helvetica', 'bold');
+                doc.text('FEATURES WE PROVIDE', 20, yPosition + 3);
+
+                yPosition += 15;
+                
+                doc.setFillColor(255, 255, 255);
+                doc.setDrawColor(...orangeColor);
+                doc.rect(20, yPosition, 170, 40, 'FD');
+                
+                doc.setFontSize(11);
+                doc.setFont('helvetica', 'normal');
+                doc.setTextColor(...darkColor);
+                
+                const featuresLines = doc.splitTextToSize(features, 160);
+                doc.text(featuresLines, 25, yPosition + 8);
+                yPosition += 50;
+            }
+
+            // New Page for Policies
+            doc.addPage();
+            yPosition = 20;
+
+            // Policy Header
+            doc.setFillColor(...orangeColor);
+            doc.rect(0, 0, 210, 30, 'F');
+            
+            doc.setTextColor(255, 255, 255);
+            doc.setFontSize(20);
+            doc.setFont('helvetica', 'bold');
+            doc.text('COMPANY POLICIES & TERMS', 20, 20);
+
+            yPosition = 45;
+
+            // Policy sections with professional formatting
+            const policies = [
+                {
+                    title: '1. PROJECT WORK POLICY',
+                    items: [
+                        'Work begins only after 50% advance payment',
+                        'Remaining 50% to be cleared before final delivery',
+                        'Project timeline and milestones discussed and approved before starting',
+                        'Additional features (not in original scope) charged separately'
+                    ]
+                },
+                {
+                    title: '2. UPDATES & MAINTENANCE POLICY',
+                    items: [
+                        'FREE UPDATES: Minor updates (text/image changes) free for first month',
+                        'PAID UPDATES: Major updates/redesigns charged based on complexity',
+                        'ANNUAL MAINTENANCE: Optional AMC available for continuous support'
+                    ]
+                },
+                {
+                    title: '3. REVISION POLICY',
+                    items: [
+                        '2 free revisions included per project',
+                        'Extra revisions beyond limit will be chargeable'
+                    ]
+                },
+                {
+                    title: '4. REFUND & CANCELLATION POLICY',
+                    items: [
+                        'Advance payment non-refundable once project starts',
+                        '100% refund possible if cancelled before work begins'
+                    ]
+                },
+                {
+                    title: '5. DELIVERY & SUPPORT POLICY',
+                    items: [
+                        'Final delivery includes source files and documentation',
+                        'Post-delivery support via email, WhatsApp, and phone'
+                    ]
+                }
+            ];
+
+            policies.forEach((policy, index) => {
+                // Check if we need a new page
+                if (yPosition > 240) {
+                    doc.addPage();
+                    yPosition = 20;
+                }
+
+                // Policy title with background
+                doc.setFillColor(...lightOrange);
+                doc.rect(15, yPosition - 3, 180, 10, 'F');
+                
+                doc.setTextColor(...orangeColor);
+                doc.setFontSize(14);
+                doc.setFont('helvetica', 'bold');
+                doc.text(policy.title, 20, yPosition + 3);
+                yPosition += 15;
+
+                // Policy items as table
+                const policyTableData = [['Policy Details']];
+                policy.items.forEach(item => {
+                    policyTableData.push([`• ${item}`]);
+                });
+
+                drawTable(doc, policyTableData, 20, yPosition, 170, 6, true);
+                yPosition += policyTableData.length * 6 + 10;
+            });
+
+            // Contact Information Section
+            if (yPosition > 220) {
+                doc.addPage();
+                yPosition = 20;
+            }
+
+            doc.setFillColor(...orangeColor);
+            doc.rect(15, yPosition, 180, 35, 'F');
+            
+            doc.setTextColor(255, 255, 255);
+            doc.setFontSize(14);
+            doc.setFont('helvetica', 'bold');
+            doc.text('CONTACT INFORMATION', 20, yPosition + 8);
+            
+            doc.setFontSize(11);
+            doc.setFont('helvetica', 'normal');
+            doc.text('Email: info@nirmexa.com', 20, yPosition + 18);
+            doc.text('Phone: +91-XXXXXXXXXX', 20, yPosition + 25);
+            doc.text('Website: www.nirmexa.com', 20, yPosition + 32);
+
+            // Footer on all pages
+            const pageCount = doc.internal.getNumberOfPages();
+            for (let i = 1; i <= pageCount; i++) {
+                doc.setPage(i);
+                
+                // Footer line
+                doc.setDrawColor(...orangeColor);
+                doc.setLineWidth(0.5);
+                doc.line(20, 285, 190, 285);
+                
+                doc.setTextColor(...grayColor);
+                doc.setFontSize(8);
+                doc.setFont('helvetica', 'normal');
+                doc.text('© 2024 Nirmexa Solution - Professional Web & Digital Solutions', 20, 290);
+                doc.text(`Page ${i} of ${pageCount}`, 175, 290);
+            }
+
+            // Helper function to draw tables
+            function drawTable(doc, data, x, y, width, rowHeight, isPolicy = false) {
+                const colWidth = width / data[0].length;
+                
+                data.forEach((row, rowIndex) => {
+                    row.forEach((cell, colIndex) => {
+                        const cellX = x + (colIndex * colWidth);
+                        const cellY = y + (rowIndex * rowHeight);
+                        
+                        // Header row styling
+                        if (rowIndex === 0 && !isPolicy) {
+                            doc.setFillColor(...orangeColor);
+                            doc.setTextColor(255, 255, 255);
+                            doc.setFont('helvetica', 'bold');
+                        } else if (isPolicy && rowIndex === 0) {
+                            doc.setFillColor(...lightOrange);
+                            doc.setTextColor(...orangeColor);
+                            doc.setFont('helvetica', 'bold');
+                        } else {
+                            doc.setFillColor(255, 255, 255);
+                            doc.setTextColor(...darkColor);
+                            doc.setFont('helvetica', 'normal');
+                        }
+                        
+                        // Draw cell background
+                        doc.rect(cellX, cellY, colWidth, rowHeight, 'FD');
+                        
+                        // Draw cell border
+                        doc.setDrawColor(200, 200, 200);
+                        doc.rect(cellX, cellY, colWidth, rowHeight);
+                        
+                        // Add text
+                        doc.setFontSize(isPolicy ? 9 : 10);
+                        const textLines = doc.splitTextToSize(cell, colWidth - 4);
+                        doc.text(textLines, cellX + 2, cellY + 5);
+                    });
+                });
+            }
+
+            // Generate filename
+            const filename = `Nirmexa_Policy_${clientName ? clientName.replace(/\s+/g, '_') : 'Client'}_${dateStr.replace(/\//g, '-')}.pdf`;
+
+            // Save the PDF
+            doc.save(filename);
+
+            // Show success message
+            const successMsg = document.getElementById('successMessage');
+            successMsg.style.display = 'block';
+            setTimeout(() => {
+                successMsg.style.display = 'none';
+            }, 3000);
+        }
+    </script>
+</body>
+</html>

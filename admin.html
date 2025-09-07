@@ -827,10 +827,16 @@
         const receiptDiv = document.createElement('div');
         receiptDiv.style.textAlign = 'right';
         receiptDiv.style.marginBottom = '20px';
-        receiptDiv.innerHTML = `<button id="generateReceiptBtn" class="control-button fetch-button" style="background: #059669; color: white; margin-top: 10px;"><i class="fas fa-file-invoice"></i> Generate Receipt</button>`;
+        receiptDiv.innerHTML = `
+          <button id="generateReceiptBtn" class="control-button fetch-button" style="background: #059669; color: white; margin-top: 10px;"><i class="fas fa-file-invoice"></i> Generate Receipt</button>
+          <button id="featurePolicyBtn" class="control-button fetch-button" style="background: #3b82f6; color: white; margin-top: 10px; margin-left: 10px;"><i class="fas fa-list-alt"></i> Feature & Policy</button>
+        `;
         dashboardSection.insertBefore(receiptDiv, dashboardSection.firstChild);
         document.getElementById('generateReceiptBtn').addEventListener('click', () => {
             window.location.href = 'recipt.html';
+        });
+        document.getElementById('featurePolicyBtn').addEventListener('click', () => {
+            window.location.href = 'feature.html';
         });
     </script>
 </body>
