@@ -55,7 +55,53 @@
             </button>
         </nav>
     </header>
+<!-- Popup overlay -->
+<div id="popup-overlay" style="position:fixed;inset:0;background:rgba(0,0,0,0.6);display:none;align-items:center;justify-content:center;padding:1rem;z-index:1000;">
+<div style="background:#ffffff;padding:1.5rem;border-radius:14px;max-width:400px;width:100%;box-shadow:0 8px 28px rgba(0,0,0,0.2);text-align:center;animation:fadeIn 0.6s ease forwards;">
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/Upwork-logo.svg/2560px-Upwork-logo.svg.png" alt="Upwork Logo" style="width:110px;height:auto;margin-bottom:0.75rem;">
 
+
+<h2 style="margin:0 0 0.75rem 0;color:#f97316;font-size:1.15rem;">Upwork Agency</h2>
+
+
+<p style="margin:0 0 1rem 0;color:#374151;font-size:0.9rem;line-height:1.5;"><b>Nirmexa Solution</b><br>
+Transform Your Business with Digital Excellence
+</p>
+
+
+<div style="margin-bottom:1.25rem;color:#6b7280;font-size:0.85rem;">⭐ Top Rated • 20+ projects</div>
+
+
+<a href="https://www.upwork.com/agencies/1968562288963405803/" target="_blank" rel="noopener noreferrer" style="display:inline-block;padding:10px 16px;border-radius:8px;background:#f97316;color:#fff;font-weight:600;text-decoration:none;font-size:0.9rem;">Visit Agency</a>
+
+
+<button onclick="document.getElementById('popup-overlay').style.display='none'" style="margin-top:0.75rem;padding:8px 14px;border:none;border-radius:6px;background:#f3f4f6;color:#f97316;font-weight:600;cursor:pointer;font-size:0.85rem;">Close</button>
+</div>
+</div>
+
+
+<style>
+@keyframes fadeIn{
+from{opacity:0;transform:translateY(-16px)}
+to{opacity:1;transform:translateY(0)}
+}
+@media (max-width:640px){
+#popup-overlay div{padding:1.25rem;border-radius:12px;}
+#popup-overlay h2{font-size:1rem;}
+#popup-overlay p{font-size:0.85rem;}
+#popup-overlay a{font-size:0.85rem;}
+#popup-overlay button{font-size:0.8rem;}
+}
+</style>
+
+
+<script>
+// Show popup after 10 seconds
+setTimeout(function(){
+var popup=document.getElementById('popup-overlay');
+if(popup){popup.style.display='flex';}
+}, 8000);
+</script>
     <!-- Hero Section -->
     <section class="hero" id="home">
         <div class="hero-bg">
@@ -144,6 +190,44 @@
             </div>
         </div>
     </section>
+<!-- Responsive Ad Container -->
+<style>
+  .ad-banner-wrapper {
+    width: 100%;
+    max-width: 400px; /* You can change this for bigger banner */
+    margin: 20px auto;
+    display: flex;
+    justify-content: center;
+  }
+
+  .ad-banner-wrapper img {
+    width: 100%;
+    height: auto;
+    border: 0;
+    display: block;
+    border-radius: 10px;         /* Creative rounded corners */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15); /* Clean professional shadow */
+    transition: transform 0.3s ease;
+  }
+
+  .ad-banner-wrapper img:hover {
+    transform: scale(1.03);     /* Smooth creative hover zoom */
+  }
+</style>
+
+<div class="ad-banner-wrapper">
+  <a rel="sponsored" 
+     href="https://bigrock-in.sjv.io/c/5757318/2083140/5632"
+     target="_top" id="2083140">
+    <img src="//a.impactradius-go.com/display-ad/5632-2083140"
+         alt="Advertisement Banner">
+  </a>
+</div>
+
+<!-- Invisible tracking pixel -->
+<img height="0" width="0"
+     src="https://bigrock-in.sjv.io/i/5757318/2083140/5632"
+     style=
 
     <!-- Services Section -->
     <section class="services-section" id="services">
